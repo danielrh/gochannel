@@ -24,27 +24,30 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 package main
-import (
-    "io"
-    "log"
-  )
 
-func processBatch(data []byte) []byte{
-    log.Print("Server got:", string(data))
-    return data
+import (
+	"io"
+	"log"
+)
+
+func processBatch(data []byte) []byte {
+	log.Print("Server got:", string(data))
+	return data
 }
 
 func nop([]byte, []byte) {
 
 }
-func makeEcho() (func(data[]byte)[]byte, func([]byte, []byte)) {
-    return processBatch, nop
+func makeEcho() (func(data []byte) []byte, func([]byte, []byte)) {
+	return processBatch, nop
 }
+
 const numBatchWorkUnits = 4
 const workSize = 2
+
 func main() {
-    processData := func(r io.Reader, w io.Writer){
-        processBatchedData(r, w, makeEcho, numBatchWorkUnits * workSize, workSize)
-    }
-    startServer(processData)
+	processData := func(r io.Reader, w io.Writer) {
+		processBatchedData(r, w, makeEcho, numBatchWorkUnits*workSize, workSize)
+	}
+	startServer(processData)
 }
