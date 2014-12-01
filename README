@@ -1,7 +1,9 @@
-This software package is designed to help interop between legay C programs and
+This software package is designed to help interop between legacy C programs and
 go programs.
 If a primarily C program needs to call a utility function that is only available
-in go, this package can assist with interop.
+in go, this package can assist with interop. In essence this package lets you
+call golang functions from C if the go functions take in simple byte arrays as
+input.
 
 The server class provides the ability for a c program to establish a "channel"
 to the go program.
