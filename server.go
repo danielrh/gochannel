@@ -95,7 +95,7 @@ func startServer(process func(io.Reader, io.Writer)) {
 	go messageOnCloseAndRun(exitChan, os.Stdin, os.Stdout, process)
 	go listenAccept(connectionChan, l)
 	for {
-		select { // FIXME: make this loop terminate if stdin or stdout close
+		select {
 		case <-exitChan:
 			return
 		case fd := <-connectionChan:
